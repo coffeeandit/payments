@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Controller
 public class PagamentoController {
 
@@ -32,6 +34,13 @@ public class PagamentoController {
     public ResponseEntity<PagamentoStripe> retrieve(@PathVariable("id") final String id)
             throws StripeException {
         return ResponseEntity.ok(stripeService.retrieve(id));
+
+
+    }
+    @GetMapping(value = "/pagamento", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<PagamentoStripe>> pagamentos()
+            throws StripeException {
+        return ResponseEntity.ok(stripeService.listPayments());
 
 
     }
