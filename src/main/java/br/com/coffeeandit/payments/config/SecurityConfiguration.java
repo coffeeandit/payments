@@ -20,7 +20,7 @@ public class SecurityConfiguration {
 
         return httpSecurity
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/actuator/**", "/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         .requestMatchers("/pagamento/**").hasAnyAuthority(SCOPE_COFFEE_AND_IT_ROLE)
                         .anyRequest()
                         .authenticated()
