@@ -1,0 +1,10 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak.coffeeandit.com.br/auth/realms/master
+
+stripe:
+  secretKey: sk_test_51Hby7ZAHErJ68yHvNjllIl6z3QlvJkuxtZSsAAlPzhA4Du6ulerci87DOYCdVpNS3hYYYN1bslZu68tu0HymHqYQ005TZmdms9
+  publicKey: pk_test_51Hby7ZAHErJ68yHvZIo0GUqD43aXj9COKnjSzdzMIjC6A9rSDImgDAstKdPQE41M0Di2hfsAXRGmngzB3HYFXaJ200bkHnRSYo

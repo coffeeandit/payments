@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: coffeeandit-ci
+  labels:
+    app: coffeeandit-ci
+    service: coffeeandit-ci
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: 80
+  selector:
+    app: coffeeandit-ci
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coffeeandit-ci-svc-lb
+  labels:
+    app: coffeeandit-ci-svc-lb
+    service: coffeeandit-ci-svc-lb
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: 80
+  type: LoadBalancer
+
+  selector:
+    app: coffeeandit-ci
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffeeandit-ci
+  labels:
+    app: coffeeandit-ci
+spec:
+  selector:
+    matchLabels:
+      app: coffeeandit-ci
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: coffeeandit-ci
+    spec:
+      containers:
+        - name: coffeeandit-ci
+          image: 049389827536.dkr.ecr.us-east-2.amazonaws.com/coffeeandit-ci:63c08e82966e7c85a3d566895f18105b3d75cf1d
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          imagePullPolicy: Always
