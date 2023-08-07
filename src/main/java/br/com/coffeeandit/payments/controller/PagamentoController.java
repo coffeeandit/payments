@@ -4,12 +4,10 @@ import br.com.coffeeandit.payments.dto.PagamentoDto;
 import br.com.coffeeandit.payments.dto.RespostaPagamento;
 import br.com.coffeeandit.payments.service.StripeService;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Charge;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

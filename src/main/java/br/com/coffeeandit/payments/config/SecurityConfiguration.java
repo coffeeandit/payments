@@ -18,6 +18,8 @@ public class SecurityConfiguration {
 
         return httpSecurity
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/pagamento/**").hasAnyAuthority("SCOPE_CoffeeAndITRole")
                         .anyRequest()
                         .authenticated()
                 )
