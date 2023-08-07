@@ -14,6 +14,7 @@ public class PagamentoStripe {
     private String status;
     private LocalDateTime created;
     private String cardToken;
-    BigDecimal valor;
+    private BigDecimal valor;
+    private String receiptUrl;
 
 }

@@ -33,5 +33,6 @@ public class PagamentoController {
             throws StripeException {
         return ResponseEntity.ok(stripeService.retrieve(id));
 
+
     }
 }

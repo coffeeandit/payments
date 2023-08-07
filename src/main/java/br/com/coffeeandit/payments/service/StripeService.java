@@ -38,10 +38,10 @@ public class StripeService {
                 .setCvc(cartao.getCvc()).build();
 
                 var params = TokenCreateParams.builder().setCard(card).build();
-
         var token = Token.create(params);
         return token.getId();
     }
+
     public PagamentoStripe charge(final PagamentoDto pagamentoDto)
             throws StripeException {
         var token = generateCardToken(pagamentoDto.getCartao());
@@ -70,6 +70,7 @@ public class StripeService {
         pagamentoStripe.setPaymentMethod(charge.getPaymentMethod());
         pagamentoStripe.setValor(BigDecimal.valueOf(charge.getAmount()).divide(BigDecimal.valueOf(100),
                 RoundingMode.CEILING));
+        pagamentoStripe.setReceiptUrl(charge.getReceiptUrl());
         return pagamentoStripe;
     }
 }

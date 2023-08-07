@@ -2,6 +2,7 @@ package br.com.coffeeandit.payments.exception;
 
 import br.com.coffeeandit.payments.dto.ErroPagamento;
 import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,21 @@ public class RestResponseEntityExceptionHandler
 
     @ExceptionHandler(value
             = { CardException.class })
-    protected ResponseEntity<Object> handleConflict(
+    protected ResponseEntity<Object> handleErroNegocio(
             final CardException cardException, final WebRequest request) {
         var error = new ErroPagamento();
         error.setMessage(cardException.getMessage());
         return handleExceptionInternal(cardException, error,
-                new HttpHeaders(), HttpStatus.CONFLICT, request);
+                new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY, request);
     }
+    @ExceptionHandler(value
+            = { InvalidRequestException.class })
+    protected ResponseEntity<Object> handleNotFound(
+            final InvalidRequestException invalidRequestException, final WebRequest request) {
+        var error = new ErroPagamento();
+        error.setMessage(invalidRequestException.getMessage());
+        return handleExceptionInternal(invalidRequestException, error,
+                new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY, request);
+    }
+
 }
