@@ -1,6 +1,7 @@
 package br.com.coffeeandit.payments.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -12,8 +13,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @SecurityScheme(
-        name = "Bearer Authentication",
+        name = "Bearer",
         type = SecuritySchemeType.HTTP,
+        in = SecuritySchemeIn.HEADER,
         bearerFormat = "JWT",
         scheme = "bearer"
 )

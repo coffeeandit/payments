@@ -21,6 +21,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pagamentos")
+@SecurityRequirement(name = "Bearer")
+
 public class PagamentoController {
     public PagamentoController(final StripeService stripeService) {
         this.stripeService = stripeService;
@@ -37,9 +39,8 @@ public class PagamentoController {
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Erro de Autenticação",
                     content = @Content) })
-    @SecurityRequirement(name = "Bearer Authentication")
-    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PagamentoStripe> charge(@Validated @RequestBody final PagamentoDto pagamentoDto)
+    @PostMapping(value = "/",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PagamentoStripe> charge(@Validated @RequestBody final PagamentoDto pagamentoDto, @RequestHeader(name = "Content-Type", defaultValue = MediaType.APPLICATION_JSON_VALUE) final String contentType)
             throws StripeException {
        return ResponseEntity.ok(stripeService.charge(pagamentoDto));
 
@@ -54,7 +55,7 @@ public class PagamentoController {
             @ApiResponse(responseCode = "401", description = "Erro de Autenticação",
                     content = @Content) })
     @GetMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PagamentoStripe> retrieve(@PathVariable("id") final String id)
+    public ResponseEntity<PagamentoStripe> retrieve(@PathVariable("id") final String id, @RequestHeader(name = "Content-Type", defaultValue = MediaType.APPLICATION_JSON_VALUE) final String contentType)
             throws StripeException {
         return ResponseEntity.ok(stripeService.retrieve(id));
 
@@ -69,8 +70,8 @@ public class PagamentoController {
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Erro de Autenticação",
                     content = @Content) })
-    @GetMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PagamentoStripe>> pagamentos()
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<PagamentoStripe>> pagamentos(@RequestHeader(name = "Content-Type", defaultValue = MediaType.APPLICATION_JSON_VALUE) final String contentType)
             throws StripeException {
         return ResponseEntity.ok(stripeService.listPayments());
 
