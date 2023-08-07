@@ -13,13 +13,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
+    public static final String SCOPE_COFFEE_AND_IT_ROLE = "SCOPE_CoffeeAndITRole";
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
         return httpSecurity
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/actuator/**").permitAll()
-                        .requestMatchers("/pagamento/**").hasAnyAuthority("SCOPE_CoffeeAndITRole")
+                        .requestMatchers("/pagamento/**").hasAnyAuthority(SCOPE_COFFEE_AND_IT_ROLE)
                         .anyRequest()
                         .authenticated()
                 )
