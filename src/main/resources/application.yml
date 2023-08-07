@@ -13,3 +13,5 @@ springdoc:
   swagger-ui:
    operationsSorter: method
    path: /swagger-ui.html
+api:
+  version: 1.0.0

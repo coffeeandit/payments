@@ -11,17 +11,16 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pagamento")
+@RequestMapping("/pagamentos")
 public class PagamentoController {
     public PagamentoController(final StripeService stripeService) {
         this.stripeService = stripeService;
@@ -31,17 +30,18 @@ public class PagamentoController {
 
     @Operation(summary = "Cria uma requisição de pagamento na Stripe.com")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Pagamento Criado",
+            @ApiResponse(responseCode = "200", description = "Pagamento Criado",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = PagamentoStripe.class)) }),
             @ApiResponse(responseCode = "403", description = "Erro de Autorização sem o escope de " + SecurityConfiguration.SCOPE_COFFEE_AND_IT_ROLE,
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Erro de Autenticação",
                     content = @Content) })
+    @SecurityRequirement(name = "Bearer Authentication")
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> charge(@Validated @RequestBody final PagamentoDto pagamentoDto)
-            throws StripeException, URISyntaxException {
-       return ResponseEntity.created(new URI("/pagamento/" + stripeService.charge(pagamentoDto).getId())).build();
+    public ResponseEntity<PagamentoStripe> charge(@Validated @RequestBody final PagamentoDto pagamentoDto)
+            throws StripeException {
+       return ResponseEntity.ok(stripeService.charge(pagamentoDto));
 
     }
     @Operation(summary = "Retorna uma requisição de pagamento na Stripe.com pelo Id")
@@ -49,7 +49,7 @@ public class PagamentoController {
             @ApiResponse(responseCode = "200", description = "Pagamento retornado",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = PagamentoStripe.class)) }),
-            @ApiResponse(responseCode = "403", description = "Erro de Autorização sem o escope de " + SecurityConfiguration.SCOPE_COFFEE_AND_IT_ROLE,
+            @ApiResponse(responseCode = "403", description = "Erro de Autorização sem    o escope de " + SecurityConfiguration.SCOPE_COFFEE_AND_IT_ROLE,
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Erro de Autenticação",
                     content = @Content) })
