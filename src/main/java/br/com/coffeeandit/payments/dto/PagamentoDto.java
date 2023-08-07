@@ -14,6 +14,6 @@ public class PagamentoDto {
         EUR, USD, BRL;
     }
     private String descricao;
-    private long quantidade;
+    private long valor;
     private Moeda moeda = Moeda.BRL;
 }
