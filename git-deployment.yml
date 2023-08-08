@@ -7,9 +7,9 @@ metadata:
     service: coffeeandit-ci
 spec:
   ports:
-    - port: 80
+    - port: 8080
       name: http
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: coffeeandit-ci
 
@@ -25,7 +25,7 @@ spec:
   ports:
     - port: 80
       name: http
-      targetPort: 80
+      targetPort: 8080
   type: LoadBalancer
 
   selector:
@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
         - name: coffeeandit-ci
-          image: 049389827536.dkr.ecr.us-east-2.amazonaws.com/coffeeandit-ci:63c08e82966e7c85a3d566895f18105b3d75cf1d
+          image: 049389827536.dkr.ecr.us-east-2.amazonaws.com/coffeeandit-ci:e82aabf70a8a757dcf35ca9c7e1e5cc78624f85
           ports:
             - containerPort: 80
               protocol: TCP
