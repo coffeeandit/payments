@@ -52,7 +52,10 @@ spec:
       containers:
         - name: coffeeandit-ci
           image: 049389827536.dkr.ecr.us-east-2.amazonaws.com/coffeeandit-ci:e82aabf70a8a757dcf35ca9c7e1e5cc78624f85
+          env:
+            - name : SPRING_PROFILES_ACTIVE
+              value: "prd"
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               protocol: TCP
           imagePullPolicy: Always

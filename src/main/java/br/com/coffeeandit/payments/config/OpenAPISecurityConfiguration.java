@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
                 description = "API para para pagamentos na Stripe"
         ),
         servers = @Server(
-                url = "http://localhost:8080",
+                url = "${api.server-url}",
                 description = "Production"
         ), security = { @SecurityRequirement(name = "Bearer Authentication")}
 )
