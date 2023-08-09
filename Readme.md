@@ -80,3 +80,4 @@ KUBE_CONFIG_DATA: Uma representação base64 do arquivo ~/.kube/config-aws. Coma
 AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID de um usuário do IAM com permissões para acessar o cluster. 
 AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY de um usuário do IAM com permissões para acessar o cluster.
 REPO_NAME - coffeeandit-ci
+
