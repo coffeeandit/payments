@@ -74,6 +74,11 @@ alias pbcopy="xclip -sel clip"
  
 Alterar o KUBE_CONFIG de client.authentication.k8s.io/v1alpha1 para client.authentication.k8s.io/v1beta1
 
+
+#### Aplicando a construção manualmente
+
+kubectl apply -f git-deployment.yml --kubeconfig=/Users/cleber/.kube/config-aws
+
 #### Secrets que devem estar no GitHub Actions para o pipeline.
 
 KUBE_CONFIG_DATA: Uma representação base64 do arquivo ~/.kube/config-aws. Comando: cat ~/.kube/config-aws | base64
