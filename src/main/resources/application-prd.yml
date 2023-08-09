@@ -15,4 +15,4 @@ springdoc:
    path: /swagger-ui.html
 api:
   version: 1.0.0
-  server-url: http://a60527675cbee4b009a4c6df37db3bc1-372289517.us-east-2.elb.amazonaws.com/swagger-ui/index.html
+  server-url: http://a60527675cbee4b009a4c6df37db3bc1-372289517.us-east-2.elb.amazonaws.com
